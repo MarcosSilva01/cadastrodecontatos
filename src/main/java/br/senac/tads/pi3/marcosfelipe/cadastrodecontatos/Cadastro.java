@@ -58,7 +58,7 @@ public class Cadastro {
 
     public void insertContatos() throws ClassNotFoundException, SQLException {
 
-        String sql = "insert into cadastro (nome,dataNascimento,telefone,email) "
+        String sql = "insert into cadastroContatos(Nome,DataNascimento,Telefone,Email) "
                 + "values (?,?,?,?)";
         con = ConBanco.conexao();
 
