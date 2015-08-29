@@ -10,4 +10,20 @@
         <maven.compiler.source>1.7</maven.compiler.source>
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+
+            <artifactId>sqljdbc41</artifactId>
+
+            <version>4.0</version>
+
+            <scope>system</scope>
+
+            <systemPath>C://Users/heito/Documents/Projeto Integrador/Biblioteca Java/sqljdbc4.jar</systemPath> 
+
+            <optional>true</optional>
+
+        </dependency>
+    </dependencies>
 </project>

@@ -7,8 +7,8 @@ package br.senac.tads.pi3.marcosfelipe.cadastrodecontatos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class Cadastro {
 
+    ResultSet rs = null;
     PreparedStatement pst = null;
     Connection con = null;
 
@@ -23,42 +24,51 @@ public class Cadastro {
     private String DataNascimento;
     private String Email;
     private String Telefone;
+    private int ID;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 
     public String getNome() {
         return Nome;
     }
 
-    public void setNome(String nome) {
-        this.Nome = nome;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
     }
 
     public String getDataNascimento() {
         return DataNascimento;
     }
 
-    public void setEmail(String email) {
-        this.Email = email;
+    public void setDataNascimento(String DataNascimento) {
+        this.DataNascimento = DataNascimento;
     }
 
     public String getEmail() {
         return Email;
     }
 
-    public void setDataNascimento(String nascimento) {
-        this.Email = nascimento;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
-    public String Telefone() {
+    public String getTelefone() {
         return Telefone;
     }
 
-    public void setTelefone(String telefone) {
-        this.Nome = telefone;
+    public void setTelefone(String Telefone) {
+        this.Telefone = Telefone;
     }
 
     public void insertContatos() throws ClassNotFoundException, SQLException {
 
-        String sql = "insert into cadastroContatos(Nome,DataNascimento,Telefone,Email) "
+        String sql = "insert into Contatos(Nome,DataNascimento,Telefone,Email) "
                 + "values (?,?,?,?)";
         con = ConBanco.conexao();
 
@@ -70,10 +80,60 @@ public class Cadastro {
             pst.setString(4, Email);
 
             pst.execute();
+            System.out.println("Cadastro efetuado com sucesso!");
             con.close();
-            System.out.println("Cadastro realizado com sucesso !");
         } catch (SQLException error) {
             System.out.println(error);
         }
     }
+
+    public void editarContatos() throws ClassNotFoundException {
+        String sql = "update Contatos set Nome = ?, DataNascimento = ?, Telefone = ?, Email = ? where  ID_Contato = ?";
+        con = ConBanco.conexao();
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, Nome);
+            pst.setString(2, DataNascimento);
+            pst.setString(3, Telefone);
+            pst.setString(4, Email);
+            pst.setInt(5, ID);
+
+            pst.executeUpdate();
+            System.out.println("Update efetudao com sucesso!");
+            con.close();
+        } catch (Exception error) {
+            System.out.println(error);
+        }
+    }
+
+    public void excluirContatos() throws ClassNotFoundException {
+        String sql = "delete from Contatos where Nome = ? and ID_Contato = ?";
+        con = ConBanco.conexao();
+
+        try {
+            pst = con.prepareStatement(sql);
+            pst.setString(1, Nome);
+            pst.setInt(2, ID);
+
+            pst.executeUpdate();
+            System.out.println("Contato excluido com sucesso!");
+            con.close();
+        } catch (Exception error) {
+            System.out.println(error);
+        }
+    }
+
+    public void selecionarContatos() throws ClassNotFoundException {
+        String sql = "select * from Contatos";
+        con = ConBanco.conexao();
+        try {
+            pst = con.prepareStatement(sql);
+
+            System.out.println(rs = pst.executeQuery());
+        } catch (Exception error) {
+            System.out.println(error);
+        }
+    }
+
 }

@@ -5,9 +5,8 @@
  */
 package br.senac.tads.pi3.marcosfelipe.cadastrodecontatos;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 /**
@@ -16,88 +15,86 @@ import java.sql.SQLException;
  */
 public class exe1 {
 
-    static Connection con = null;
-    static String nome, dataNascimento, email, telefone;
-    PreparedStatement pst = null;
     static Scanner entrada = new Scanner(System.in);
 
-    
     static void entradaDados() throws ClassNotFoundException, SQLException {
         try {
+
+            System.out.println("Cadastro de Contatos:\n"
+                    + "Nome, Data de Nascimento, E-mail, Telefone\n\n");
             Cadastro cad = new Cadastro();
-            cad.setNome(nome);
-            cad.setDataNascimento(dataNascimento);
-            cad.setTelefone(telefone);
-            cad.setEmail(email);
-            
+            System.out.print("Nome: ");
+            cad.setNome(entrada.nextLine());
+            System.out.print("Data de nascimento: ");
+            cad.setDataNascimento(entrada.nextLine());
+            System.out.print("Telefone: ");
+            cad.setTelefone(entrada.nextLine());
+            System.out.print("E-mail: ");
+            cad.setEmail(entrada.nextLine());
+
             cad.insertContatos();
-            //return true;
         } catch (NumberFormatException | ClassNotFoundException error) {
             System.out.println(error);
-            //return false;
         }
+
     }
-    
-    static void popula(){
-        System.out.println("Cadastro de Contatos:\n"
-                + "Nome, Data de Nascimento, E-mail, Telefone\n\n");
+
+    static void listarDados() throws ClassNotFoundException {
+       //Não sei como fazer
+
+    }
+
+    static void editarDados() throws ClassNotFoundException {
+        Cadastro cad = new Cadastro();
         System.out.print("Nome: ");
-        nome = entrada.nextLine();
+        cad.setNome(entrada.nextLine());
         System.out.print("Data de nascimento: ");
-        dataNascimento = entrada.nextLine();
-        System.out.print("E-mail: ");
-        email = entrada.nextLine();
+        cad.setDataNascimento(entrada.nextLine());
         System.out.print("Telefone: ");
-        telefone = entrada.nextLine();
+        cad.setTelefone(entrada.nextLine());
+        System.out.print("E-mail: ");
+        cad.setEmail(entrada.nextLine());
+        System.out.print("ID do Contato: ");
+        cad.setID(entrada.nextInt());
+
+        cad.editarContatos();
     }
-    
-    
+
+    static void excluirDados() throws ClassNotFoundException {
+        Cadastro cad = new Cadastro();
+        System.out.print("Nome: ");
+        cad.setNome(entrada.nextLine());
+        System.out.print("ID do Contato: ");
+        cad.setID(entrada.nextInt());
+        
+        cad.excluirContatos();
+    }
+
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         System.out.println("Digite sua opção:");
-        int opcao=0;
-        boolean teste=false;
-        do{
-            System.out.println("\n(1) Cadastro de contatos"
+        String opcao = "";
+        boolean sair = false;
+        do {
+            System.out.println("\n(1) Cadastrar Contatos"
+                    + "\n(2) Listar Contatos"
+                    + "\n(3) Editar Contato"
+                    + "\n(4) Excluir Contato"
                     + "\n(9) Sair");
-            opcao = entrada.nextInt();
-            if(opcao==1){
-                popula();
+            opcao = entrada.next();
+            if (opcao.equals("1")) {
                 entradaDados();
-            }
-            else if(opcao==9){
-                System.exit(0);
-            }
-            else{
+            } else if (opcao.equals("2")) {
+                listarDados();
+            } else if (opcao.equals("3")) {
+                editarDados();
+            } else if (opcao.equals("4")) {
+                excluirDados();
+            } else if (opcao.equals("9")) {
+                sair = true;
+            } else {
                 System.out.println("Opção invalida !");
             }
-        }while(teste=false);
-        
-        
-        
-        
+        } while (sair == false);
+
     }
-    
-    /*public void insertContato() throws ClassNotFoundException {
-        String sql = "insert into contatos"
-                + "values(Nome = ?,Celular = ?,Email = ?,Rua = ?,"
-                + "Numero = ?,Bairro = ?,Complemento = ?,Funcional = ? where  CPF = ?";
-        con = ConBanco.conexao();
-        try {
-            pst = con.prepareStatement(sql);
-            pst.setString(1, nome);
-            pst.setString(2, dataNascimento);
-            pst.setString(3, email);
-            pst.setString(4, telefone);
-
-            pst.execute();
-
-            
-            con.close();
-        } catch (SQLException error) {
-            System.out.println("Impossivel cadastrar !");
-        }
-    }*/
-
-    
-
 }
