@@ -24,41 +24,59 @@ public class Cadastro {
     private String Email;
     private String Telefone;
 
+    public PreparedStatement getPst() {
+        return pst;
+    }
+
+    public void setPst(PreparedStatement pst) {
+        this.pst = pst;
+    }
+
+    public Connection getCon() {
+        return con;
+    }
+
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+
     public String getNome() {
         return Nome;
     }
 
-    public void setNome(String nome) {
-        this.Nome = nome;
+    public void setNome(String Nome) {
+        this.Nome = Nome;
     }
 
     public String getDataNascimento() {
         return DataNascimento;
     }
 
-    public void setEmail(String email) {
-        this.Email = email;
+    public void setDataNascimento(String DataNascimento) {
+        this.DataNascimento = DataNascimento;
     }
 
     public String getEmail() {
         return Email;
     }
 
-    public void setDataNascimento(String nascimento) {
-        this.Email = nascimento;
+    public void setEmail(String Email) {
+        this.Email = Email;
     }
 
-    public String Telefone() {
+    public String getTelefone() {
         return Telefone;
     }
 
-    public void setTelefone(String telefone) {
-        this.Nome = telefone;
+    public void setTelefone(String Telefone) {
+        this.Telefone = Telefone;
     }
+
+    
 
     public void insertContatos() throws ClassNotFoundException, SQLException {
 
-        String sql = "insert into cadastroContatos(Nome,DataNascimento,Telefone,Email) "
+        String sql = "insert into Contatos(Nome,DataNascimento,Telefone,Email) "
                 + "values (?,?,?,?)";
         con = ConBanco.conexao();
 

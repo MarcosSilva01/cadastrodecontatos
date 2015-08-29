@@ -18,10 +18,10 @@ public class ConBanco {
 
     public static Connection conexao() throws ClassNotFoundException {
         Connection con = null;
-        String url = "jdbc:sqlserver://localhost\\MSSQLSERVER:1433;databaseName=cadastroContatos";
+        String url = "jdbc:sqlserver://localhost\\MSSQLSERVER:1433;databaseName=Contatos";
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver").newInstance();
-            con = DriverManager.getConnection(url, "MarcosFelipe", "12345678");
+            con = DriverManager.getConnection(url, "Agenda", "Heitor1231");
 
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException error) {
             System.out.println(null + "SQLServer: " + error);
