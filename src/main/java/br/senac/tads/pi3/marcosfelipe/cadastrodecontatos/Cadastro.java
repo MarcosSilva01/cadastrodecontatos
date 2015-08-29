@@ -34,6 +34,22 @@ public class Cadastro {
         this.ID = ID;
     }
 
+    public PreparedStatement getPst() {
+        return pst;
+    }
+
+    public void setPst(PreparedStatement pst) {
+        this.pst = pst;
+    }
+
+    public Connection getCon() {
+        return con;
+    }
+
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+
     public String getNome() {
         return Nome;
     }
@@ -65,6 +81,8 @@ public class Cadastro {
     public void setTelefone(String Telefone) {
         this.Telefone = Telefone;
     }
+
+    
 
     public void insertContatos() throws ClassNotFoundException, SQLException {
 
