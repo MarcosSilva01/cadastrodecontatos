@@ -5,7 +5,6 @@
  */
 package br.senac.tads.pi3.marcosfelipe.cadastrodecontatos;
 
-import java.sql.ResultSet;
 import java.util.Scanner;
 import java.sql.SQLException;
 
@@ -31,6 +30,13 @@ public class exe1 {
             cad.setTelefone(entrada.nextLine());
             System.out.print("E-mail: ");
             cad.setEmail(entrada.nextLine());
+            cad.setNome(entrada.next());
+            System.out.print("Data de nascimento: ");
+            cad.setDataNascimento(entrada.next());
+            System.out.print("Telefone: ");
+            cad.setTelefone(entrada.next());
+            System.out.print("E-mail: ");
+            cad.setEmail(entrada.next());
 
             cad.insertContatos();
         } catch (NumberFormatException | ClassNotFoundException error) {
@@ -40,7 +46,8 @@ public class exe1 {
     }
 
     static void listarDados() throws ClassNotFoundException {
-       //Não sei como fazer
+        Cadastro cad = new Cadastro();
+        cad.selecionarContatos();
 
     }
 
@@ -66,7 +73,7 @@ public class exe1 {
         cad.setNome(entrada.nextLine());
         System.out.print("ID do Contato: ");
         cad.setID(entrada.nextInt());
-        
+
         cad.excluirContatos();
     }
 
@@ -74,12 +81,12 @@ public class exe1 {
         System.out.println("Digite sua opção:");
         String opcao = "";
         boolean sair = false;
+        System.out.println("\n(1) Cadastrar Contatos"
+                + "\n(2) Listar Contatos"
+                + "\n(3) Editar Contato"
+                + "\n(4) Excluir Contato"
+                + "\n(9) Sair");
         do {
-            System.out.println("\n(1) Cadastrar Contatos"
-                    + "\n(2) Listar Contatos"
-                    + "\n(3) Editar Contato"
-                    + "\n(4) Excluir Contato"
-                    + "\n(9) Sair");
             opcao = entrada.next();
             if (opcao.equals("1")) {
                 entradaDados();

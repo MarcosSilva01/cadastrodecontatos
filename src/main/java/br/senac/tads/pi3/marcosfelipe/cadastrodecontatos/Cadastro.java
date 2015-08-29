@@ -34,6 +34,22 @@ public class Cadastro {
         this.ID = ID;
     }
 
+    public PreparedStatement getPst() {
+        return pst;
+    }
+
+    public void setPst(PreparedStatement pst) {
+        this.pst = pst;
+    }
+
+    public Connection getCon() {
+        return con;
+    }
+
+    public void setCon(Connection con) {
+        this.con = con;
+    }
+
     public String getNome() {
         return Nome;
     }
@@ -65,6 +81,8 @@ public class Cadastro {
     public void setTelefone(String Telefone) {
         this.Telefone = Telefone;
     }
+
+    
 
     public void insertContatos() throws ClassNotFoundException, SQLException {
 
@@ -129,8 +147,21 @@ public class Cadastro {
         con = ConBanco.conexao();
         try {
             pst = con.prepareStatement(sql);
+            rs = pst.executeQuery();
+            System.out.println("===================================");
+            while (rs.next()) {
+                ID = rs.getInt("ID_Contato");
+                Nome = rs.getString("Nome");
+                DataNascimento = rs.getString("DataNascimento");
+                Telefone = rs.getString("Telefone");
+                Email = rs.getString("Email");
+                System.out.println("ID: "+ID+"\n"+"Nome: "+Nome+"\n"+
+                                   "Nascimento: "+DataNascimento+"\n"+
+                                   "Telefone: "+Telefone+"\n"+
+                                   "Email: "+Email);
+                System.out.println("===================================");
+            }
 
-            System.out.println(rs = pst.executeQuery());
         } catch (Exception error) {
             System.out.println(error);
         }
